@@ -72,7 +72,7 @@ public class FieldTest {
     }
 
     @Test
-    public void getFigureWheXIsMoreThanMaxFieldSize() {
+    public void getFigureWhenXIsMoreThanMaxFieldSize() {
 
         final Field field = new Field();
         final Point inputPoint = new Point(field.getFieldSize() + 1, 0);
@@ -86,7 +86,7 @@ public class FieldTest {
     }
 
     @Test
-    public void getFigureWheYIsMoreThanMaxFieldSize() {
+    public void getFigureWhenYIsMoreThanMaxFieldSize() {
 
         final Field field = new Field();
         final Point inputPoint = new Point(0, field.getFieldSize() + 1);
@@ -95,6 +95,23 @@ public class FieldTest {
             field.getFigure(inputPoint);
             fail();
         } catch (InvalidPointException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void setFigureWhenAlreadyOccupied() throws AlreadyOccupiedException, InvalidPointException {
+
+        final Field field = new Field();
+        final Point inputPoint = new Point(0, 0);
+        final Figure inputFigure = Figure.O;
+
+        field.setFigure(inputPoint, inputFigure);
+
+        try {
+            field.setFigure(inputPoint, inputFigure);
+            fail();
+        } catch (AlreadyOccupiedException e) {
             e.printStackTrace();
         }
     }
