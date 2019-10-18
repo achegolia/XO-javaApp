@@ -1,5 +1,7 @@
 package com.javaapp.xo.model;
 
+import com.javaapp.xo.model.exceptions.AlreadyOccupiedException;
+import com.javaapp.xo.model.exceptions.InvalidPointException;
 import org.junit.Test;
 
 import java.awt.*;
@@ -17,15 +19,83 @@ public class FieldTest {
     }
 
     @Test
-    public void setFigure() {
+    public void setFigure() throws AlreadyOccupiedException, InvalidPointException {
 
         final Field field = new Field();
-        final Point inputPoint = new Point(0,0);
+        final Point inputPoint = new Point(0, 0);
         final Figure inputFigure = Figure.O;
 
         field.setFigure(inputPoint, inputFigure);
+
         final Figure actualFigure = field.getFigure(inputPoint);
 
-        assertEquals(inputFigure,actualFigure);
+        assertEquals(inputFigure, actualFigure);
+    }
+
+    @Test
+    public void getFigureWhenFigureIsNotSet() throws InvalidPointException {
+
+        final Field field = new Field();
+        final Point inputPoint = new Point(0, 0);
+
+        final Figure actualFigure = field.getFigure(inputPoint);
+
+        assertNull(actualFigure);
+    }
+
+    @Test
+    public void getFigureWhenXIsLessThanZero() {
+
+        final Field field = new Field();
+        final Point inputPoint = new Point(-1, 0);
+
+        try {
+            field.getFigure(inputPoint);
+            fail();
+        } catch (InvalidPointException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getFigureWhenYIsLessThanZero() {
+
+        final Field field = new Field();
+        final Point inputPoint = new Point(0, -1);
+
+        try {
+            field.getFigure(inputPoint);
+            fail();
+        } catch (InvalidPointException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getFigureWheXIsMoreThanMaxFieldSize() {
+
+        final Field field = new Field();
+        final Point inputPoint = new Point(field.getFieldSize() + 1, 0);
+
+        try {
+            field.getFigure(inputPoint);
+            fail();
+        } catch (InvalidPointException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getFigureWheYIsMoreThanMaxFieldSize() {
+
+        final Field field = new Field();
+        final Point inputPoint = new Point(0, field.getFieldSize() + 1);
+
+        try {
+            field.getFigure(inputPoint);
+            fail();
+        } catch (InvalidPointException e) {
+            e.printStackTrace();
+        }
     }
 }
