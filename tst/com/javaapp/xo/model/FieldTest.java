@@ -52,9 +52,7 @@ public class FieldTest {
         try {
             field.getFigure(inputPoint);
             fail();
-        } catch (InvalidPointException e) {
-            e.printStackTrace();
-        }
+        } catch (InvalidPointException e) {}
     }
 
     @Test
@@ -66,9 +64,7 @@ public class FieldTest {
         try {
             field.getFigure(inputPoint);
             fail();
-        } catch (InvalidPointException e) {
-            e.printStackTrace();
-        }
+        } catch (InvalidPointException e) {}
     }
 
     @Test
@@ -80,9 +76,7 @@ public class FieldTest {
         try {
             field.getFigure(inputPoint);
             fail();
-        } catch (InvalidPointException e) {
-            e.printStackTrace();
-        }
+        } catch (InvalidPointException e) {}
     }
 
     @Test
@@ -94,9 +88,7 @@ public class FieldTest {
         try {
             field.getFigure(inputPoint);
             fail();
-        } catch (InvalidPointException e) {
-            e.printStackTrace();
-        }
+        } catch (InvalidPointException e) {}
     }
 
     @Test
@@ -111,8 +103,6 @@ public class FieldTest {
         try {
             field.setFigure(inputPoint, inputFigure);
             fail();
-        } catch (AlreadyOccupiedException e) {
-            e.printStackTrace();
-        }
+        } catch (AlreadyOccupiedException e) {}
     }
 }
